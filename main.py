@@ -20,6 +20,7 @@ target_y = random.randint(0, SCREEN_HEIGHT - target_height)
 
 color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
 
+hits = 0
 
 running = True
 while running:
@@ -32,6 +33,15 @@ while running:
             if (target_x <= mouse_x <= target_x + target_width) and (target_y <= mouse_y <= target_y + target_height):
                 target_x = random.randint(0, SCREEN_WIDTH - target_width)
                 target_y = random.randint(0, SCREEN_HEIGHT - target_height)
+                hits += 1
     screen.blit(target_img, (target_x, target_y))
     pygame.display.update()
+#Выводим количество попаданий после завершения игры
+font = pygame.font.Font(None, 36)
+text = font.render("Попаданий: " + str(hits), True, (255, 255, 255))
+text_rect = text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
+screen.blit(text, text_rect)
+pygame.display.update()
+
+pygame.time.delay(2000)  # Задержка перед закрытием окна
 pygame.quit()
